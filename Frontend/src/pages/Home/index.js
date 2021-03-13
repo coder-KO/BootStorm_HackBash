@@ -1,10 +1,23 @@
-import React from "react";
+import { lazy } from "react";
+
+import IntroContent from "../../content/IntroContent.json";
+
+const ContentBlock = lazy(() => import("../../components/ContentBlock"));
+const Container = lazy(() => import("../../common/Container"));
 
 const Home = () => {
   return (
-    <div>
-      <h1>Homepage | Docufied</h1>
-    </div>
+    <Container>
+      <ContentBlock
+        type="right"
+        first="true"
+        title={IntroContent.title}
+        content={IntroContent.text}
+        button={IntroContent.button}
+        icon="home_main.svg"
+        id="intro"
+      />
+    </Container>
   );
 };
 
