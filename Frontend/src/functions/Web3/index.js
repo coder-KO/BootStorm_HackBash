@@ -23,7 +23,7 @@ const loadBlockChainData = async (setAccount, setNetworkId, setTokenContract) =>
     const networkId = await web3.eth.net.getId();
     setNetworkId(networkId); 
     localStorage.networkId = networkId;
-    const tokenContract = await new web3.eth.Contract(ABI,"0x7a8D808CDd4BDb08b29F217d0237A5d1a857B6df");
+    const tokenContract = await new web3.eth.Contract(ABI,"0x0d48Cc799f82746670b577D05d826F9a2855E160");
     setTokenContract(tokenContract);
     console.log(tokenContract)
 

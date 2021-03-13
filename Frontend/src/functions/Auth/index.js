@@ -1,7 +1,7 @@
 // import axios from "axios";
 import axios from "./../../helper/axios";
 
-const Login = async (userData) => {
+const Login = async (userData, history) => {
   try {
     console.log(userData);
     //calling the register API
@@ -13,10 +13,14 @@ const Login = async (userData) => {
     // varifying the token
 
     const isValid = await axios.post("/tokenIsValid");
+    console.log(isValid)
+
+    localStorage.setItem("auth-token", token);
 
     if (isValid === true) {
       //re-route to the dashboard page
       console.log("I'm In");
+      history.push("/organisation/dashboard",{from:"/home"});
     }
 
     if (isValid === false) {
