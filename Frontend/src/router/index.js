@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { React, Suspense, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import routes from "./config";
@@ -6,20 +6,23 @@ import GlobalStyles from "../globalStyles";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Home from "../pages/Home";
 
 const Router = () => {
+  const [visible, setVisible] = useState(false);
+
   return (
     <Suspense fallback={null}>
       <GlobalStyles />
-      <Header />
+      <Header visible={visible} setVisible={setVisible} />
       <Switch>
         {routes.map((routeItem) => {
           return (
             <Route
-              key={routeItem.component}
-              path={routeItem.path}
-              exact={routeItem.exact}
-              component={lazy(() => import(`../pages/${routeItem.component}`))}
+              path="/"
+              component={() => (
+                <Home visible={visible} setVisible={setVisible} />
+              )}
             />
           );
         })}

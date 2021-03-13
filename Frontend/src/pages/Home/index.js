@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { React, lazy } from "react";
 
 import IntroContent from "../../content/IntroContent.json";
 import MiddleBlockContent from "../../content/MiddleBlockContent.json";
@@ -6,13 +6,19 @@ import AboutContent from "../../content/AboutContent.json";
 import MissionContent from "../../content/MissionContent.json";
 import ProductContent from "../../content/ProductContent.json";
 import RegisterContent from "../../content/RegisterContent.json";
+import LoginForm from "../../components/LoginForm";
 
-const RegisterFrom = lazy(() => import("../../components/RegisterForm"));
+// import RegisterForm from "../../components/RegisterForm";
+// import ContentBlock from "../../components/ContentBlock";
+// import MiddleBlock from "../../components/MiddleBlock";
+// import Container from "../../common/Container";
+
+const RegisterForm = lazy(() => import("../../components/RegisterForm"));
 const ContentBlock = lazy(() => import("../../components/ContentBlock"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
 const Container = lazy(() => import("../../common/Container"));
 
-const Home = () => {
+const Home = (props) => {
   return (
     <Container>
       <ContentBlock
@@ -52,11 +58,13 @@ const Home = () => {
         id="product"
       />
 
-      <RegisterFrom
+      <RegisterForm
         title={RegisterContent.title}
         content={RegisterContent.text}
         id="register"
       />
+
+      <LoginForm visible={props.visible} setVisible={props.setVisible} />
     </Container>
   );
 };
