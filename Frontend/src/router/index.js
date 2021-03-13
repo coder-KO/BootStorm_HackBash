@@ -6,6 +6,7 @@ import GlobalStyles from "../globalStyles";
 
 import Home from "../Layout/HomeComponent";
 import OrgDashboardPage from "../pages/OrgDashboardPage";
+import {loadWeb3, loadBlockChainData, listenAccountChange, listenNetworkChange} from "../functions/Web3"
 
 const Router = () => {
   const [userData, setUserData] = useState({
@@ -13,6 +14,10 @@ const Router = () => {
     user: undefined,
   });
   const [loading, setLoading] = useState(true);
+  const [metaMaskInstalled, setMetaMaskInstalled] = useState(false);
+  const [account, setAccount] = useState('');
+  const [networkId, setNetworkId] = useState('');
+  const [tokenContract, setTokenContract] = useState('');
 
   useEffect(() => {
     const checkLoggedin = async () => {
@@ -41,9 +46,23 @@ const Router = () => {
     };
 
     checkLoggedin();
+    const metaMaskInstalled = typeof window.web3 !== 'undefined'
+          setMetaMaskInstalled(metaMaskInstalled);
+        
+            if(metaMaskInstalled){
+                loadWeb3(setMetaMaskInstalled);
+                loadBlockChainData(setAccount,setNetworkId,setTokenContract);
+                listenAccountChange(setAccount);
+                listenNetworkChange(setNetworkId);
+            }
+
   }, []);
 
   console.log(loading);
+  console.log(tokenContract)
+  console.log(account)
+  console.log(networkId)
+
 
   return (
     <>
@@ -52,7 +71,7 @@ const Router = () => {
       ) : (
         <Suspense fallback={null}>
           <GlobalStyles />
-          <UserContext.Provider value={{ userData, setUserData }}>
+          <UserContext.Provider value={{ userData, setUserData, account, tokenContract, networkId, metaMaskInstalled }}>
             <Switch>
               <Route path="/home" component={() => <Home />} />
               <Route
