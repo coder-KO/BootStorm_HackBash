@@ -1,26 +1,11 @@
 import axios from "axios";
 
-const Register = async(userData) => (e) => {
-    
-    try{
-        e.preventDefault();
 
-        //calling the register API
-        await axios.post("http://localhost:5000/users/register", userData);
-
-        //re-route to the dashboard page
-
-    }catch(err){
-        console.log(err)
-    }
-
-}
-
-const Login = async(userData) => (e) => {
+const Login = async(userData) =>  {
 
     try{
-        e.preventDefault();
-
+       
+        console.log(userData);
         //calling the register API
         const returnData = await axios.post("http://localhost:5000/users/login", userData);
         const token = returnData.token;
@@ -36,6 +21,7 @@ const Login = async(userData) => (e) => {
         if(isValid === true){
 
             //re-route to the dashboard page
+            console.log("I'm In")
         }
 
         if(isValid === false){
@@ -51,6 +37,5 @@ const Login = async(userData) => (e) => {
 }
 
 export {
-    Signup,
-    Signin
+    Login
 }

@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { Modal, Button, Form, Input } from "antd";
+import { Login } from "../../functions/Auth";
 
 const layout = {
   labelCol: {
@@ -11,6 +12,10 @@ const layout = {
 };
 
 const LoginForm = (props) => {
+  const[userData, setUserData] = useState({
+    email:"",
+    password:""
+  })
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const onFinish = (values) => {
@@ -34,6 +39,14 @@ const LoginForm = (props) => {
     props.setVisible(false);
   };
 
+  const handleChange = (e) => {
+    setUserData({
+        ...userData,
+        [e.target.name] : e.target.value
+    });
+
+}
+
   return (
     <>
       {/* <Button type="primary" onClick={showModal}>
@@ -46,7 +59,7 @@ const LoginForm = (props) => {
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         footer={[
-          <Button style={{ background: "#008891", color: "#fff" }}>
+          <Button style={{ background: "#008891", color: "#fff" }} onClick={() => Login(userData)}>
             Submit
           </Button>,
         ]}
@@ -62,13 +75,15 @@ const LoginForm = (props) => {
         >
           <Form.Item
             label="Email"
-            name="username"
+            name="email"
             rules={[
               {
                 required: true,
                 message: "Please input your email!",
               },
             ]}
+            value={userData.email || ""}
+            onChange={handleChange}
           >
             <Input />
           </Form.Item>
@@ -82,6 +97,8 @@ const LoginForm = (props) => {
                 message: "Please input your password!",
               },
             ]}
+            value={userData.password || ""}
+            onChange={handleChange}
           >
             <Input.Password />
           </Form.Item>

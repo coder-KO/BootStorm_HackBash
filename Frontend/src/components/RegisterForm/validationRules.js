@@ -11,7 +11,7 @@ export default function validate(values) {
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
     errors.email = "Email address is invalid";
   }
-  if (!values.message) {
+  if (!values.description) {
     errors.message = "Description is required";
   }
   return errors;
