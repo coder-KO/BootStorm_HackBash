@@ -2,7 +2,7 @@ const Users = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 
 const generateJwtToken = (_id, role) => {
-  return jwt.sign({ _id, role }, process.env.JWT_SECRET || "test", {
+  return jwt.sign({ _id, role }, process.env.JWT_SECRET, {
     expiresIn: "1d",
   });
 };
@@ -85,4 +85,34 @@ exports.signIn = (req, res) => {
   } catch (err) {
     return res.status(500).json({ err });
   }
+};
+
+exports.tokenIsValid = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    console.log(token);
+    if (!token) return res.json(false);
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(verified);
+    if (!verified) return res.json(false);
+
+    const user = await Users.findById(verified._id);
+    console.log(user);
+    if (!user) return res.json(false);
+
+    return res.json(true);
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};
+
+exports.getUserData = (req, res) => {
+  Users.findById(req.user._id, (err, data) => {
+    if (err) {
+      return res.json(err);
+    } else {
+      return res.json(data);
+    }
+  });
 };

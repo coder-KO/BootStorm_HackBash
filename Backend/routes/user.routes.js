@@ -1,9 +1,12 @@
-const Users = require("../models/user.model");
-const bcrypt = require("bcryptjs");
+const Users = require("./../models/user.model");
 const jwt = require("jsonwebtoken");
 const Router = require("express").Router();
-// const Auth = require("../middleware/auth");
-const { signUp, signIn } = require("../controller/user");
+const {
+  signUp,
+  signIn,
+  tokenIsValid,
+  getUserData,
+} = require("../controller/user");
 const { Auth } = require("../middleware/auth");
 
 //======================================================================================================//
@@ -32,39 +35,11 @@ Router.delete("/delete", Auth, async (req, res) => {
 //======================================================================================================//
 //	Route for jwt token validation
 //======================================================================================================//
-Router.post("/tokenIsValid", async (req, res) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    console.log(token);
-    if (!token) return res.json(false);
-
-    const verified = jwt.verify(token, process.env.JWT_SECRET || "test");
-    console.log(verified);
-    if (!verified) return res.json(false);
-
-    const user = await Users.findById(verified.id);
-    console.log(user);
-    if (!user) return res.json(false);
-
-    return res.json(true);
-  } catch (err) {
-    return res.status(500).json({ err });
-  }
-});
+Router.post("/tokenIsValid", tokenIsValid);
 
 //======================================================================================================//
 //	Route to get User Data
 //======================================================================================================//
-Router.get("/", Auth, (req, res) => {
-  console.log("in");
-  Users.findById(req.user._id, (err, data) => {
-    if (err) {
-      return res.json(err);
-    } else {
-      console.log("in");
-      return res.json(data);
-    }
-  });
-});
+Router.get("/", Auth, getUserData);
 
 module.exports = Router;
