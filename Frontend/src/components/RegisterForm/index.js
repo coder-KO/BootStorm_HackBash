@@ -52,7 +52,7 @@ const Contact = ({ title, content, id, t }) => {
                   type="text"
                   name="email"
                   id="Email"
-                  placeholder="Your Email"
+                  placeholder="Your Email."
                   value={values.email || ""}
                   onChange={handleChange}
                 />
@@ -74,7 +74,7 @@ const Contact = ({ title, content, id, t }) => {
                   placeholder="Organisation Description"
                   value={values.message || ""}
                   name="message"
-                  id="Message"
+                  id="Description"
                   onChange={handleChange}
                 />
                 <ValidationType type="message" />

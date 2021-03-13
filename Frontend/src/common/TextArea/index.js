@@ -4,10 +4,10 @@ import * as S from "./styles";
 
 const TextArea = ({ name, id, placeholder, onChange, t }) => (
   <S.Container>
-    <label htmlFor={name}>{t(id)}</label>
+    <label htmlFor={name}>{id}</label>
     <S.TextArea
       spellcheck="false"
-      placeholder={t(placeholder)}
+      placeholder={placeholder}
       id={name}
       name={name}
       onChange={onChange}
