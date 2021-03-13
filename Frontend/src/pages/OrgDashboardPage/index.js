@@ -1,4 +1,5 @@
-import React, { useEffect, useContext, useState, useHistory } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import OrgDashboard from "../../components/OrgDashboard";
 import { UserContext } from "./../../context/UserContext";
 
