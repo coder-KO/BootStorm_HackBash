@@ -16,7 +16,7 @@ mongoose.set("useUnifiedTopology", true);
 
 mongoose.connect("mongodb://localhost/Docu_Verify", (err, db) => {
   console.log("Db connected");
-  console.log(process.env.JWT_SECRET);
+  // console.log(process.env.JWT_SECRET);
 });
 
 app.use("/users", UserRoutes);
