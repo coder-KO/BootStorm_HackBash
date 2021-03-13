@@ -1,5 +1,29 @@
-import React from "react";
+import React,{useContext} from "react";
+import { UserContext } from "../../context/UserContext";
+
 
 export default function DocumentList() {
-  return <div>Document List will go here</div>;
+  const {userData} = useContext(UserContext)
+  console.log(userData)
+
+  return <div>
+    <p>All uploaded docs</p>
+    <ul>
+      {
+        userData.user.signed_docs.map((doc,key) => {
+          return (
+            <li>
+              <object
+              data={
+                  doc
+              }
+              width="600"
+              height="400"
+            ></object>
+            </li>
+          )
+        })
+      }
+    </ul>
+  </div>;
 }

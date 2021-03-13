@@ -2,6 +2,8 @@ import React, { useMemo, useState, useContext } from "react";
 import { Grid, Typography, Button, TextField } from "@material-ui/core";
 import { useDropzone } from "react-dropzone";
 import { UserContext } from "../../context/UserContext";
+import axios from "../../helper/axios";
+
 const ipfsClient = require("ipfs-http-client");
 const moment = require("moment");
 
@@ -88,6 +90,12 @@ export default function Upload(props) {
       .sethashDetails(userData.user.name, timeStamp, res.path)
       .send({ from: account });
     setFileHash(res.path);
+
+    const msg = await axios.post("/addDocumnets",{
+      documentHash:fileHash
+    });
+
+    console.log(msg);
   };
 
   return (

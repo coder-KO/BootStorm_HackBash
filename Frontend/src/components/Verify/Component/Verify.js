@@ -9,12 +9,7 @@ export default function Verify(props) {
 
   return (
     <>
-      {/* <ContractConsumer>
-        {(a) => {
-          //   console.log(a);
-          setInstance(a);
-        }}
-      </ContractConsumer> */}
+   
 
       <Grid
         container
@@ -53,16 +48,7 @@ export default function Verify(props) {
             justify="center"
             alignItems="center"
           >
-            {/* <img
-              //   src={`https://ipfs.infura.io/ipfs/${props.fileHash}`}
-              src={
-                props.fileHash
-                  ? `https://ipfs.infura.io/ipfs/${props.fileHash}`
-                  : "https://picsum.photos/600/400"
-              }
-              style={{ width: "100%" }}
-              alt="f"
-            /> */}
+           
             <object
               data={
                 props.fileHash
@@ -112,33 +98,7 @@ export default function Verify(props) {
             }
           })()}
 
-          {/* {props.outputResult.timestamp != 0 ? (
-            <Grid
-              container
-              item
-              //   xs={6}
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              verified : by {props.outputResult.uploader_name}
-              Time :
-              {moment
-                .unix(props.outputResult.timestamp)
-                .format("dddd, MMMM Do, YYYY h:mm:ss A")}
-            </Grid>
-          ) : (
-            <Grid
-              container
-              item
-              //   xs={6}
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              This document is not uploaded on blockchain. Or is Tampered
-            </Grid>
-          )} */}
+          
 
           <Grid
             container
