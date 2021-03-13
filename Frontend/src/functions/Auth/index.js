@@ -1,55 +1,30 @@
-import axios from "axios";
+// import axios from "axios";
+import axios from "./../../helper/axios";
 
-const Signup = async(userData) => (e) => {
-    try{
-        e.preventDefault();
+const Login = async (userData) => {
+  try {
+    console.log(userData);
+    //calling the register API
+    const returnData = await axios.post("/login", userData);
+    console.log(returnData);
+    const token = returnData.data.token;
+    console.log(token);
 
-        //calling the register API
-        await axios.post("http://localhost:5000/users/register", userData);
+    // varifying the token
 
-        //re-route to the dashboard page
+    const isValid = await axios.post("/tokenIsValid");
 
-    }catch(err){
-        console.log(err)
+    if (isValid === true) {
+      //re-route to the dashboard page
+      console.log("I'm In");
     }
 
-}
-
-const Signin = async(userData) => (e) => {
-
-    try{
-        e.preventDefault();
-
-        //calling the register API
-        const returnData = await axios.post("http://localhost:5000/users/login", userData);
-        const token = returnData.token;
-
-        // varifying the token
-
-        const isValid = await axios.post("http://localhost:5000/users/tokenIsValid", {}, {
-            headers:{
-                'Authorization': `Bearer ${token}`
-            }
-        });
-
-        if(isValid === true){
-
-            //re-route to the dashboard page
-        }
-
-        if(isValid === false){
-            console.log("Unauthorized");
-        }
-
-        
-
-    }catch(err){
-        console.log(err)
+    if (isValid === false) {
+      console.log("Unauthorized");
     }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-}
-
-export {
-    Signup,
-    Signin
-}
+export { Login };

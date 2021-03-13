@@ -10,22 +10,28 @@ const useForm = (validate) => {
   const openNotificationWithIcon = (type) => {
     notification[type]({
       message: "Success",
-      description: "Your message has been sent!",
+      description: "User Registered Successfully!",
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors(validate(values));
+    console.log(values)
     // Your url for API
-    const url = "";
-    if (Object.keys(values).length === 3) {
+    const url = "http://localhost:5000/users/register";
+
+    if (Object.keys(values).length !== 0) {
       axios
         .post(url, {
-          ...values,
+          ...values
         })
         .then(() => {
           setShouldSubmit(true);
+
+        })
+        .catch(err => {
+          console.log(err)
         });
     }
   };

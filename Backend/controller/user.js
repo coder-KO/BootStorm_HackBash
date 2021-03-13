@@ -7,24 +7,19 @@ const generateJwtToken = (_id, role) => {
   });
 };
 
+const IPFSLink = (hash) => {
+  return `https://ipfs.infura.io/ipfs/${hash}`;
+};
+
 exports.signUp = async (req, res) => {
   try {
     const data = req.body;
 
-    if (
-      !data.email ||
-      !data.password ||
-      !data.passwordCheck ||
-      !data.name ||
-      !data.description
-    ) {
+    if (!data.email || !data.password || !data.name || !data.description) {
       return res.status(400).json({ msg: "Not all fields are there" });
     }
     if (data.password.length < 5) {
       return res.status(400).json({ msg: "Enter password of 5 letters" });
-    }
-    if (data.password !== data.passwordCheck) {
-      return res.status(400).json({ msg: "Password did not match" });
     }
 
     Users.findOne({ email: data.email }, async (err, res_data) => {
@@ -103,6 +98,7 @@ exports.tokenIsValid = async (req, res) => {
 
     return res.json(true);
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ err });
   }
 };
@@ -115,4 +111,35 @@ exports.getUserData = (req, res) => {
       return res.json(data);
     }
   });
+};
+
+exports.addDocuments = (req, res) => {
+  try {
+    const { documentHash } = req.body;
+    const link = IPFSLink(documentHash);
+    if (documentHash) {
+      Users.updateOne(
+        { _id: req.user._id },
+        { $push: { signed_docs: link } },
+        (err, data) => {
+          console.log(data);
+          if (err) {
+            return res.status(400).json({
+              msg: "Somethong Went wrong try again",
+            });
+          } else {
+            return res.status(200).json({
+              msg: "Updated sucessfully",
+            });
+          }
+        }
+      );
+    } else {
+      return res.status(400).json({
+        msg: "Not all fields",
+      });
+    }
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
 };
