@@ -11,20 +11,11 @@ exports.signUp = async (req, res) => {
   try {
     const data = req.body;
 
-    if (
-      !data.email ||
-      !data.password ||
-      !data.passwordCheck ||
-      !data.name ||
-      !data.description
-    ) {
+    if (!data.email || !data.password || !data.name || !data.description) {
       return res.status(400).json({ msg: "Not all fields are there" });
     }
     if (data.password.length < 5) {
       return res.status(400).json({ msg: "Enter password of 5 letters" });
-    }
-    if (data.password !== data.passwordCheck) {
-      return res.status(400).json({ msg: "Password did not match" });
     }
 
     Users.findOne({ email: data.email }, async (err, res_data) => {
@@ -116,3 +107,5 @@ exports.getUserData = (req, res) => {
     }
   });
 };
+
+exports.addImages = async (req, res) => {};
