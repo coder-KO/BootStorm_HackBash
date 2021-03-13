@@ -1,6 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useContext } from "react";
 import { Grid, Typography, Button, TextField } from "@material-ui/core";
 import { useDropzone } from "react-dropzone";
+import { UserContext } from "../../context/UserContext";
+const ipfsClient = require("ipfs-http-client");
+const moment = require("moment");
+
+const ipfs = ipfsClient({
+  host: "ipfs.infura.io",
+  port: "5001",
+  protocol: "https",
+});
 
 const baseStyle = {
   flex: 1,
@@ -31,6 +40,10 @@ const rejectStyle = {
 };
 
 export default function Upload(props) {
+  const {account, tokenContract, networkId} = useContext(UserContext)
+  const [buffer, setBuffer] = useState();
+  const [uploaderName, setUploaderName] = useState("");
+  const [fileHash, setFileHash] = useState(null);
   const {
     getRootProps,
     getInputProps,
@@ -49,12 +62,39 @@ export default function Upload(props) {
     [isDragActive, isDragReject, isDragAccept]
   );
 
+  const CaptureFile = (e) => {
+    e.preventDefault();
+    console.log("uploaded");
+    console.log(e.target.files);
+    const file = e.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => {
+      console.log("buffer = ", Buffer(reader.result));
+      setBuffer(Buffer(reader.result));
+    };
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submitting form");
+
+    const res = await ipfs.add(buffer);
+    console.log(res);
+    var timeStamp = moment().unix();
+    console.log(timeStamp);
+    await tokenContract.methods
+      .sethashDetails(uploaderName, timeStamp, res.path)
+      .send({ from: account });
+    setFileHash(res.path);
+  };
+
   return (
     <div className="container">
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <div {...getRootProps({ style })}>
-            <input {...getInputProps()} />
+            <input {...getInputProps()} onChange={CaptureFile} />
             <p>
               Drag 'n' drop some files here, or click to select files to verify
             </p>
@@ -93,8 +133,9 @@ export default function Upload(props) {
           <Button
             variant="contained"
             style={{ background: "#008891", color: "#fff" }}
+            onClick={onSubmit}
           >
-            Verify
+            Upload
           </Button>
         </Grid>
       </Grid>
