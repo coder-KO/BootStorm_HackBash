@@ -5,6 +5,7 @@ import routes from "./config";
 import GlobalStyles from "../globalStyles";
 
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
           );
         })}
       </Switch>
+      <Footer />
     </Suspense>
   );
 };
