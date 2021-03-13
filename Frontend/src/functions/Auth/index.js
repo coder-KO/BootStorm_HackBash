@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const Signup = async(event, userData) => {
+const Signup = async(userData) => (e) => {
     try{
-        event.preventDefault();
+        e.preventDefault();
 
         //calling the register API
         await axios.post("http://localhost:5000/users/register", userData);
@@ -15,15 +15,33 @@ const Signup = async(event, userData) => {
 
 }
 
-const Signin = async(event, userData) => {
+const Signin = async(userData) => (e) => {
 
     try{
-        event.preventDefault();
+        e.preventDefault();
 
         //calling the register API
-        await axios.post("http://localhost:5000/users/login", userData);
+        const returnData = await axios.post("http://localhost:5000/users/login", userData);
+        const token = returnData.token;
 
-        //re-route to the dashboard page
+        // varifying the token
+
+        const isValid = await axios.post("http://localhost:5000/users/tokenIsValid", {}, {
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if(isValid === true){
+
+            //re-route to the dashboard page
+        }
+
+        if(isValid === false){
+            console.log("Unauthorized");
+        }
+
+        
 
     }catch(err){
         console.log(err)
