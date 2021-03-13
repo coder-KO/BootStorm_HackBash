@@ -98,6 +98,7 @@ exports.tokenIsValid = async (req, res) => {
 
     return res.json(true);
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ err });
   }
 };

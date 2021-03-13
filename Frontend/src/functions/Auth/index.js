@@ -9,10 +9,11 @@ const Login = async(userData) =>  {
         //calling the register API
         const returnData = await axios.post("http://localhost:5000/users/login", userData);
         const token = returnData.token;
+        console.log(token)
 
         // varifying the token
 
-        const isValid = await axios.post("http://localhost:5000/users/tokenIsValid", {}, {
+        const isValid = await axios.post("http://localhost:5000/users/tokenIsValid", null, {
             headers:{
                 'Authorization': `Bearer ${token}`
             }

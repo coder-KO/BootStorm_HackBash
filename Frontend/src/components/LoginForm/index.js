@@ -39,13 +39,14 @@ const LoginForm = (props) => {
     props.setVisible(false);
   };
 
-  const handleChange = (e) => {
-    setUserData({
-        ...userData,
-        [e.target.name] : e.target.value
-    });
-
+  const handleChange = (e,xyz) => {
+    // setUserData({
+    //     ...userData,
+    //     [e.target.name] : e.target.value
+    // });
+    console.log(xyz);
 }
+console.log(userData);
 
   return (
     <>
@@ -83,7 +84,7 @@ const LoginForm = (props) => {
               },
             ]}
             value={userData.email || ""}
-            onChange={handleChange}
+            onChange={(e) => {setUserData({...userData,email:e.target.value})}}
           >
             <Input />
           </Form.Item>
@@ -98,7 +99,7 @@ const LoginForm = (props) => {
               },
             ]}
             value={userData.password || ""}
-            onChange={handleChange}
+            onChange={(e) => {setUserData({...userData,password:e.target.value})}}
           >
             <Input.Password />
           </Form.Item>
