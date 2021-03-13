@@ -40,7 +40,7 @@ const rejectStyle = {
 };
 
 export default function Upload(props) {
-  const {account, tokenContract, networkId} = useContext(UserContext)
+  const {account, tokenContract, networkId, userData} = useContext(UserContext)
   const [buffer, setBuffer] = useState();
   const [uploaderName, setUploaderName] = useState("");
   const [fileHash, setFileHash] = useState(null);
@@ -75,6 +75,7 @@ export default function Upload(props) {
     };
   };
 
+
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting form");
@@ -84,7 +85,7 @@ export default function Upload(props) {
     var timeStamp = moment().unix();
     console.log(timeStamp);
     await tokenContract.methods
-      .sethashDetails(uploaderName, timeStamp, res.path)
+      .sethashDetails(userData.user.name, timeStamp, res.path)
       .send({ from: account });
     setFileHash(res.path);
   };
@@ -114,7 +115,7 @@ export default function Upload(props) {
             id="verifiedBy"
             size="small"
             readOnly
-            value="Verified by"
+            value={`Uploader : ${userData.user.name}`}
             variant="filled"
             InputProps={{ style: { borderColor: "red", color: "#008891" } }}
             fullWidth
