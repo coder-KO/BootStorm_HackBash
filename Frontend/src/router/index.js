@@ -6,6 +6,7 @@ import GlobalStyles from "../globalStyles";
 
 import Home from "../Layout/HomeComponent";
 import OrgDashboardPage from "../pages/OrgDashboardPage";
+import VerifyPage from "../pages/VerifyPage";
 
 const Router = () => {
   const [userData, setUserData] = useState({
@@ -59,6 +60,7 @@ const Router = () => {
                 path="/organisation/dashboard/"
                 component={() => <OrgDashboardPage />}
               />
+              <Route path="/verify" component={() => <VerifyPage />} />
             </Switch>
           </UserContext.Provider>
         </Suspense>
