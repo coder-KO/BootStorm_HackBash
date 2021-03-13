@@ -63,11 +63,6 @@ const Router = () => {
     }
   }, []);
 
-  console.log(loading);
-  console.log(tokenContract);
-  console.log(account);
-  console.log(networkId);
-
   return (
     <>
       {loading ? (
