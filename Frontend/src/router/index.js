@@ -2,7 +2,6 @@ import { React, Suspense, useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { UserContext } from "./../context/UserContext";
 import Axios from "./../helper/axios";
-import routes from "./config";
 import GlobalStyles from "../globalStyles";
 
 import Home from "../Layout/HomeComponent";
