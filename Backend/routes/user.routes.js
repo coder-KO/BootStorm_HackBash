@@ -34,13 +34,16 @@ Router.delete("/delete", Auth, async (req, res) => {
 //======================================================================================================//
 Router.post("/tokenIsValid", async (req, res) => {
   try {
-    const token = req.header("x-auth-token");
+    const token = req.headers.authorization.split(" ")[1];
+    console.log(token);
     if (!token) return res.json(false);
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    const verified = jwt.verify(token, process.env.JWT_SECRET || "test");
+    console.log(verified);
     if (!verified) return res.json(false);
 
     const user = await Users.findById(verified.id);
+    console.log(user);
     if (!user) return res.json(false);
 
     return res.json(true);
