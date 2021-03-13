@@ -13,14 +13,15 @@ const Login = async (userData, history) => {
     // varifying the token
 
     const isValid = await axios.post("/tokenIsValid");
-    console.log(isValid)
+    console.log(isValid);
 
     localStorage.setItem("auth-token", token);
 
     if (isValid === true) {
       //re-route to the dashboard page
       console.log("I'm In");
-      history.push("/organisation/dashboard",{from:"/home"});
+      history.push("/organisation/dashboard");
+      // window.location.href("/organisation/dashboard/");
     }
 
     if (isValid === false) {

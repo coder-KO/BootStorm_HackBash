@@ -1,7 +1,9 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { Modal, Button, Form, Input } from "antd";
-import { Login } from "../../functions/Auth";
-import {useHistory} from "react-router-dom";
+// import { Login } from "../../functions/Auth";
+import { useHistory } from "react-router-dom";
+import { UserContext } from "./../../context/UserContext";
+import axios from "./../../helper/axios";
 
 const layout = {
   labelCol: {
@@ -14,10 +16,11 @@ const layout = {
 
 const LoginForm = (props) => {
   const history = useHistory();
-  const[userData, setUserData] = useState({
-    email:"",
-    password:""
-  })
+  const { userData, setUserData } = useContext(UserContext);
+  const [userData2, setUserData2] = useState({
+    email: "",
+    password: "",
+  });
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const onFinish = (values) => {
@@ -41,14 +44,39 @@ const LoginForm = (props) => {
     props.setVisible(false);
   };
 
-  const handleChange = (e,xyz) => {
-    // setUserData({
-    //     ...userData,
+  const handleChange = (e, xyz) => {
+    // setUserData2({
+    //     ...userData2,
     //     [e.target.name] : e.target.value
     // });
     console.log(xyz);
-}
-console.log(userData);
+  };
+  console.log(userData2);
+
+  const Login = async (userData2) => {
+    try {
+      console.log(userData2);
+      //calling the register API
+      const returnData = await axios.post("/login", userData2);
+      console.log(returnData);
+      const token = returnData.data.token;
+      localStorage.setItem("auth-token", token);
+
+      setUserData({
+        token,
+        user: returnData.data.user,
+      });
+      if (token) {
+        history.push("/organisation/dashboard/", { from: "/home" });
+      } else {
+        console.log("Unauthorized");
+      }
+
+      // window.location.href("/organisation/dashboard/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -62,7 +90,10 @@ console.log(userData);
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         footer={[
-          <Button style={{ background: "#008891", color: "#fff" }} onClick={() => Login(userData,history)}>
+          <Button
+            style={{ background: "#008891", color: "#fff" }}
+            onClick={() => Login(userData2)}
+          >
             Submit
           </Button>,
         ]}
@@ -85,8 +116,10 @@ console.log(userData);
                 message: "Please input your email!",
               },
             ]}
-            value={userData.email || ""}
-            onChange={(e) => {setUserData({...userData,email:e.target.value})}}
+            value={userData2.email || ""}
+            onChange={(e) => {
+              setUserData2({ ...userData2, email: e.target.value });
+            }}
           >
             <Input />
           </Form.Item>
@@ -100,8 +133,10 @@ console.log(userData);
                 message: "Please input your password!",
               },
             ]}
-            value={userData.password || ""}
-            onChange={(e) => {setUserData({...userData,password:e.target.value})}}
+            value={userData2.password || ""}
+            onChange={(e) => {
+              setUserData2({ ...userData2, password: e.target.value });
+            }}
           >
             <Input.Password />
           </Form.Item>

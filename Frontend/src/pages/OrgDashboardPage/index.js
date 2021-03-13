@@ -14,11 +14,7 @@ const OrgDashboardPage = () => {
     if (!userData.user) history.push("/home");
     setLoading(false);
   });
-  return (
-    <>
-      <OrgDashboard />
-    </>
-  );
+  return <>{loading ? <p>loading</p> : <OrgDashboard />}</>;
 };
 
 export default OrgDashboardPage;
