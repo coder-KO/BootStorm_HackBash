@@ -7,6 +7,10 @@ const generateJwtToken = (_id, role) => {
   });
 };
 
+const IPFSLink = (hash) => {
+  return `https://ipfs.infura.io/ipfs/${hash}`;
+};
+
 exports.signUp = async (req, res) => {
   try {
     const data = req.body;
@@ -108,4 +112,33 @@ exports.getUserData = (req, res) => {
   });
 };
 
-exports.addImages = async (req, res) => {};
+exports.addDocuments = (req, res) => {
+  try {
+    const { documentHash } = req.body;
+    const link = IPFSLink(documentHash);
+    if (documentHash) {
+      Users.updateOne(
+        { _id: req.user._id },
+        { $push: { signed_docs: link } },
+        (err, data) => {
+          console.log(data);
+          if (err) {
+            return res.status(400).json({
+              msg: "Somethong Went wrong try again",
+            });
+          } else {
+            return res.status(200).json({
+              msg: "Updated sucessfully",
+            });
+          }
+        }
+      );
+    } else {
+      return res.status(400).json({
+        msg: "Not all fields",
+      });
+    }
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};

@@ -6,6 +6,7 @@ const {
   signIn,
   tokenIsValid,
   getUserData,
+  addDocuments,
 } = require("../controller/user");
 const { Auth } = require("../middleware/auth");
 
@@ -45,6 +46,6 @@ Router.get("/", Auth, getUserData);
 //======================================================================================================//
 //	Route to add signed Documents
 //======================================================================================================//
-Router.get("/addDocumnets", Auth, getUserData);
+Router.post("/addDocumnets", Auth, addDocuments);
 
 module.exports = Router;
