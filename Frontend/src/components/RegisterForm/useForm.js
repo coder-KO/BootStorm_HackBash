@@ -18,8 +18,9 @@ const useForm = (validate) => {
     event.preventDefault();
     setErrors(validate(values));
     // Your url for API
-    const url = "";
-    if (Object.keys(values).length === 3) {
+    const url = "http://localhost:5000/users/register";
+
+    if (Object.keys(values).length === 4) {
       axios
         .post(url, {
           ...values,

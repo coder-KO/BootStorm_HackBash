@@ -72,7 +72,7 @@ const Contact = ({ title, content, id, t }) => {
               <Col span={24}>
                 <TextArea
                   placeholder="Organisation Description"
-                  value={values.message || ""}
+                  value={values.description || ""}
                   name="message"
                   id="Description"
                   onChange={handleChange}

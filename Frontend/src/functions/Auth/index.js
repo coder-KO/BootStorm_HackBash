@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const Signup = async(userData) => (e) => {
+const Register = async(userData) => (e) => {
+    
     try{
         e.preventDefault();
 
@@ -15,7 +16,7 @@ const Signup = async(userData) => (e) => {
 
 }
 
-const Signin = async(userData) => (e) => {
+const Login = async(userData) => (e) => {
 
     try{
         e.preventDefault();
