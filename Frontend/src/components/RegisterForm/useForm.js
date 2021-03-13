@@ -52,6 +52,9 @@ const useForm = (validate) => {
     setErrors((errors) => ({ ...errors, [event.target.name]: "" }));
   };
 
+  console.log(values);
+
+
   return {
     handleChange,
     handleSubmit,
