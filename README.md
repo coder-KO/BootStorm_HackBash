@@ -1,5 +1,17 @@
-# BootStorm_HackBash
-This repository will contain the code for submission in the HackBash 2021 hackathon by team BootStorm
+# Docufied
+
+Docufied is a blockchain based onlie document verification web application.
+
+## Installation and Usage
+
+1. Clone the repository 
+2. cd Backend
+3. ```npm install``` to install backend dependencies
+4. ```npm start``` to start the backend server
+5. cd Frontend
+6. ```npm install``` to install frontend dependencies
+7. ```npm start``` to start the React server
+
 
 
 ### Contributors 
