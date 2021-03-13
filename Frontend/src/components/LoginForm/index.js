@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { Modal, Button, Form, Input } from "antd";
 import { Login } from "../../functions/Auth";
+import {useHistory} from "react-router-dom";
 
 const layout = {
   labelCol: {
@@ -12,6 +13,7 @@ const layout = {
 };
 
 const LoginForm = (props) => {
+  const history = useHistory();
   const[userData, setUserData] = useState({
     email:"",
     password:""
@@ -60,7 +62,7 @@ console.log(userData);
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         footer={[
-          <Button style={{ background: "#008891", color: "#fff" }} onClick={() => Login(userData)}>
+          <Button style={{ background: "#008891", color: "#fff" }} onClick={() => Login(userData,history)}>
             Submit
           </Button>,
         ]}
