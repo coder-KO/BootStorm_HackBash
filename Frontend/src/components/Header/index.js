@@ -8,7 +8,7 @@ import * as S from "./styles";
 const SvgIcon = lazy(() => import("../../common/SvgIcon"));
 const Button = lazy(() => import("../../common/Button"));
 
-const Header = ({ t }) => {
+const Header = (props) => {
   const [isNavVisible] = useState(false);
   const [isSmallScreen] = useState(false);
   const [visible, setVisibility] = useState(false);
@@ -32,14 +32,17 @@ const Header = ({ t }) => {
     return (
       <Fragment>
         <S.CustomNavLinkSmall onClick={() => scrollTo("about")}>
-          <S.Span>{t("About")}</S.Span>
+          <S.Span>About</S.Span>
         </S.CustomNavLinkSmall>
-        <S.CustomNavLinkSmall
-          style={{ width: "180px" }}
-          onClick={() => scrollTo("login")}
-        >
+        <S.CustomNavLinkSmall style={{ width: "180px" }}>
           <S.Span>
-            <Button>{t("Login")}</Button>
+            <Button
+              onClick={() => {
+                props.setVisible(!props.visible);
+              }}
+            >
+              Login
+            </Button>
           </S.Span>
         </S.CustomNavLinkSmall>
       </Fragment>
