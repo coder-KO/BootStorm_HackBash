@@ -1,4 +1,4 @@
-import { React, lazy } from "react";
+import { React, lazy, useContext, useEffect } from "react";
 
 import IntroContent from "../../content/IntroContent.json";
 import MiddleBlockContent from "../../content/MiddleBlockContent.json";
@@ -7,6 +7,8 @@ import MissionContent from "../../content/MissionContent.json";
 import ProductContent from "../../content/ProductContent.json";
 import RegisterContent from "../../content/RegisterContent.json";
 import LoginForm from "../../components/LoginForm";
+import {UserContext} from "../../context/UserContext";
+import {useHistory} from "react-router-dom"
 
 // import RegisterForm from "../../components/RegisterForm";
 // import ContentBlock from "../../components/ContentBlock";
@@ -19,6 +21,16 @@ const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
 const Container = lazy(() => import("../../common/Container"));
 
 const Home = (props) => {
+  const history = useHistory();
+  const {userData} = useContext(UserContext);
+
+
+  useEffect(() => {
+    if(userData){
+      history.push("/organisation/dashboard", {from:"/home"})
+    }
+  }, []);
+
   return (
     <Container>
       <ContentBlock
