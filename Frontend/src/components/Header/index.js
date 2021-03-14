@@ -1,7 +1,8 @@
-import { useState, Fragment, lazy } from "react";
+import { useState, Fragment, lazy, useContext } from "react";
 import { Row, Col, Drawer } from "antd";
 import { CSSTransition } from "react-transition-group";
 import { withTranslation } from "react-i18next";
+import {UserContext} from "../../context/UserContext"
 
 import * as S from "./styles";
 
@@ -9,6 +10,7 @@ const SvgIcon = lazy(() => import("../../common/SvgIcon"));
 const Button = lazy(() => import("../../common/Button"));
 
 const Header = (props) => {
+  const {userData} = useContext(UserContext)
   const [isNavVisible] = useState(false);
   const [isSmallScreen] = useState(false);
   const [visible, setVisibility] = useState(false);
@@ -44,7 +46,11 @@ const Header = (props) => {
                 props.setVisible(!props.visible);
               }}
             >
-              Login
+              {
+                !userData
+                ? <>Login</>
+                : <>{userData.user.name}</>
+              }
             </Button>
           </S.Span>
         </S.CustomNavLinkSmall>

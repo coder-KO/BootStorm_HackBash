@@ -31,7 +31,7 @@ export default function SidebarList(props) {
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
-        <ListItemText primary="Integrations" />
+        <ListItemText primary="History" />
       </ListItem>
     </List>
   );
