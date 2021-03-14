@@ -30,11 +30,11 @@ const Home = (props) => {
         icon="home_2.svg"
         id="intro"
       />
-      <MiddleBlock
+      {/* <MiddleBlock
         title={MiddleBlockContent.title}
         content={MiddleBlockContent.text}
         button={MiddleBlockContent.button}
-      />
+      /> */}
       <ContentBlock
         type="left"
         title={AboutContent.title}
@@ -42,7 +42,7 @@ const Home = (props) => {
         icon="blockchain.svg"
         id="about"
       />
-      <ContentBlock
+      {/* <ContentBlock
         type="right"
         title={MissionContent.title}
         content={MissionContent.text}
@@ -56,7 +56,7 @@ const Home = (props) => {
         content={ProductContent.text}
         icon="waving.svg"
         id="product"
-      />
+      /> */}
 
       <RegisterForm
         title={RegisterContent.title}

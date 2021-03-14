@@ -34,6 +34,9 @@ const Header = (props) => {
         <S.CustomNavLinkSmall onClick={() => scrollTo("about")}>
           <S.Span>About</S.Span>
         </S.CustomNavLinkSmall>
+        <S.CustomNavLinkSmall onClick={() => scrollTo("register")}>
+          <S.Span>Register</S.Span>
+        </S.CustomNavLinkSmall>
         <S.CustomNavLinkSmall style={{ width: "180px" }}>
           <S.Span>
             <Button

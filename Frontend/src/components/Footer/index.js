@@ -33,19 +33,21 @@ const Footer = ({ t }) => {
               <Col lg={10} md={10} sm={12} xs={24}>
                 <S.Empty />
                 <S.Language>{t("Docufied")}</S.Language>
-                <S.Para>Document Verification Tool</S.Para>
-                <S.Para>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</S.Para>
                 <S.Para>
-                  {" "}
-                  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                  Certify your documents on blockchain in a future-proof way.
+                  With no point of failure and virtually impossible to hack,
+                  eliminate the document fraud risks with Docufied.
                 </S.Para>
               </Col>
               <Col lg={8} md={8} sm={12} xs={24}></Col>
               <Col lg={6} md={6} sm={12} xs={24}>
                 <S.Empty />
                 <S.Title>{t("Quick Links")}</S.Title>
-                <S.Large left="true" to="/">
+                <S.Large left="true" to="#about">
                   {t("About")}
+                </S.Large>
+                <S.Large left="true" to="#register">
+                  {t("Register")}
                 </S.Large>
               </Col>
             </Row>
