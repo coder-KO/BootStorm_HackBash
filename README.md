@@ -42,24 +42,25 @@ Hence we made Docufied. A blockchain based web application where organisations c
 ### Contributors 
 #### Krishna Ojha
 
-> [Github](https://github.com/coder-KO)
+[Github](https://github.com/coder-KO)
 
-> [Personal Profile](https://coder-ko.github.io/personal-site/)
+[Personal Profile](https://coder-ko.github.io/personal-site/)
 
 #### Dhairya Patel
 
-> [Github](https://github.com/AAA530)
+[Github](https://github.com/AAA530)
 
-> [Personal Profile](https://drive.google.com/file/d/1bgJpT2rRf0upA91vG-3iNV_eQZBaZvvn/view?usp=sharing)
+[Personal Profile](https://drive.google.com/file/d/1bgJpT2rRf0upA91vG-3iNV_eQZBaZvvn/view?usp=sharing)
 
 #### Vikas Choudhary 
 
-> [Github](https://github.com/vikaschoudhary007)
+[Github](https://github.com/vikaschoudhary007)
 
-> [Personal Profile](https://drive.google.com/file/d/1xGKEAjikdb-157t9kHudxxevxp8w1ub2/view?usp=sharing)
+[Personal Profile](https://drive.google.com/file/d/1xGKEAjikdb-157t9kHudxxevxp8w1ub2/view?usp=sharing)
 
+***
 ## Show your support
 
 Give a ⭐️ if you like this project!
 
-***
+
