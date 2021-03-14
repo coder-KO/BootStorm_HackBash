@@ -35,6 +35,7 @@ export default function Index() {
       console.log("buffer = ", Buffer(reader.result));
       setBuffer(Buffer(reader.result));
     };
+    console.log("hiiii");
   };
 
   const handleInputChange = (event) => {
@@ -50,12 +51,8 @@ export default function Index() {
   };
 
   const OnSubmit = async (e) => {
-    // Qmd9Jhi4q5hxD3wonKi3FYUQkVYx6GcnUDVUn3tPxNhesE
-
-    // QmZEC7dm3WBNpdqSzGs7iCVGeBeWGJyz8FQqDSc56ikdg9
-
-    //QmZEC7dm3WBNpdqSzGs7iCVGeBeWGJyz8FQqDSc56ikdg9
     e.preventDefault();
+
     console.log("Submitting form");
 
     const res = await ipfs.add(buffer);

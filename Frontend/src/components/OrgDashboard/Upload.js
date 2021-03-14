@@ -89,10 +89,11 @@ export default function Upload(props) {
     await tokenContract.methods
       .sethashDetails(userData.user.name, timeStamp, res.path)
       .send({ from: account });
+
     setFileHash(res.path);
 
-    const msg = await axios.post("/addDocumnets",{
-      documentHash:fileHash
+    const msg = await axios.post("/addDocuments",{
+      documentHash:res.path
     });
 
     console.log(msg);

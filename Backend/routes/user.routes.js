@@ -46,6 +46,6 @@ Router.get("/", Auth, getUserData);
 //======================================================================================================//
 //	Route to add signed Documents
 //======================================================================================================//
-Router.post("/addDocumnets", Auth, addDocuments);
+Router.post("/addDocuments", Auth, addDocuments);
 
 module.exports = Router;
