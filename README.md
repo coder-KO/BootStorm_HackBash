@@ -1,7 +1,8 @@
 <h1 align="center">Docufied</h1>
-<p>
+<p align="center">
+  Docufied is a blockchain based onlie document verification web application.
 </p>
-Docufied is a blockchain based onlie document verification web application.
+
 
 ## Installation and Usage
 
