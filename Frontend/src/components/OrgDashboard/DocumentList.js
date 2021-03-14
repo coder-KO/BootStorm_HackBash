@@ -13,13 +13,14 @@ export default function DocumentList() {
         userData.user.signed_docs.map((doc,key) => {
           return (
             <li>
-              <object
+              {/* <object
               data={
                   doc
               }
               width="600"
               height="400"
-            ></object>
+            ></object> */}
+            <a href={doc} target="_blank">Document - {key}</a>
             </li>
           )
         })
