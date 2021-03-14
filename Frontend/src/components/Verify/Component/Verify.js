@@ -121,9 +121,11 @@ export default function Verify(props) {
                     justify="center"
                     alignItems="center"
                   >
-                    verified : by {props.outputResult.uploader_name}
-                    Time :
-                    {moment
+                    <h5 style={{color:"green"}}>Verified</h5>
+                    Uploded by : {props.outputResult.uploader_name}
+                    <tr /><tr />
+                    Time : 
+                     {moment
                       .unix(props.outputResult.timestamp)
                       .format("dddd, MMMM Do, YYYY h:mm:ss A")}
                   </Grid>
@@ -138,7 +140,7 @@ export default function Verify(props) {
                     justify="center"
                     alignItems="center"
                   >
-                    This document is not uploaded on blockchain. Or is Tampered
+                    <p style={{color:"red"}}>This document is tempered or not uploaded on blockchain</p>
                   </Grid>
                 );
               }
